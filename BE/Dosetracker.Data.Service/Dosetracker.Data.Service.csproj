@@ -5,8 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LinqKit" Version="1.1.21" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Dosetracker.Data.Models\Dosetracker.Data.Models.csproj" />
     <ProjectReference Include="..\Dosetracker.Repository\Dosetracker.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

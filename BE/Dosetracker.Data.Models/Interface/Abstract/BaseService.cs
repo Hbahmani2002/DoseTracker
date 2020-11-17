@@ -13,7 +13,7 @@ namespace GT.SERVICE
             Context = context;
             Workspace = workspace;
         }
-        public BaseService(IBussinessContext context, bool log = false)
+        protected BaseService(IBussinessContext context, bool log = false)
         {
             Context = context;
             Workspace = WorkspaceFactory.Create(log);
@@ -22,7 +22,7 @@ namespace GT.SERVICE
         {
             Workspace = WorkspaceFactory.Create(false);
         }
-        public void Commit()
+        protected void Commit()
         {
             Workspace.CommitChanges();
         }
