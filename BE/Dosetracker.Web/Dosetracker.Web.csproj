@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Dosetracker.Api.Contract\Dosetracker.Api.Contract.csproj" />
     <ProjectReference Include="..\Dosetracker.Data.Controller\Dosetracker.Data.Controller.csproj" />
+    <ProjectReference Include="..\Dosetracker.Data.Service\Dosetracker.Data.Service.csproj" />
     <ProjectReference Include="..\Dosetracker.Setting.Global\Dosetracker.Setting.Global.csproj" />
     <ProjectReference Include="..\Dosetracker.Settings\Dosetracker.Settings.csproj" />
   </ItemGroup>

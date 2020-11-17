@@ -16,9 +16,9 @@ namespace Cloud.HL7.UI.WebApi.Controller
 
         [Route("/App/Control")]
         public RESTServiceResult<object> Control()
-        {           
+        {
             var ass = Assembly.GetExecutingAssembly().GetName();
-            return RESTServiceResult<object>.Ok(new
+            return RESTServiceResult.Ok<object>(new
             {
                 AssemblyName = ass.FullName,
                 Version = ass.Version.ToString(),
@@ -31,6 +31,6 @@ namespace Cloud.HL7.UI.WebApi.Controller
                     WorkingSet = Environment.WorkingSet,
                 }
             });
-        }       
+        }
     }
 }

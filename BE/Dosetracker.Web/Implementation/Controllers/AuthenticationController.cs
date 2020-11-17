@@ -16,7 +16,7 @@ namespace Cloud.HL7.UI.WebApi.Controller
         public RESTServiceResult<string> Token(LoginUIModel model)
         {
             var token = LoginJWTService.GenerateJwtToken(1, "Test");
-            return RESTServiceResult<string>.Ok(token);
+            return RESTServiceResult.Ok(token);
         }
         [HttpGet]
         [Route("/Authentication/GetTokenFromAPIKEY")]
@@ -30,14 +30,14 @@ namespace Cloud.HL7.UI.WebApi.Controller
         public RESTServiceResult<UserTokenModel> Status()
         {
             if (User == null || User.Identities == null)
-                return RESTServiceResult<UserTokenModel>.Ok(null);
+                return RESTServiceResult.Ok((UserTokenModel)null);
             var identity = User.Identities.FirstOrDefault();
             if (identity == null)
             {
-                return RESTServiceResult<UserTokenModel>.Ok(null);
+                return RESTServiceResult.Ok((UserTokenModel)null);
             }
             var item = LoginJWTService.GetTokenValues(identity);
-            return RESTServiceResult<UserTokenModel>.Ok(item);
+            return RESTServiceResult.Ok(item);
         }
     }
 }
