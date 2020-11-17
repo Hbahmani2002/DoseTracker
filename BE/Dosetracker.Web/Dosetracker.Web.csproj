@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dosetracker.Api.Contract\Dosetracker.Api.Contract.csproj" />
+    <ProjectReference Include="..\Dosetracker.Data.Controller\Dosetracker.Data.Controller.csproj" />
+    <ProjectReference Include="..\Dosetracker.Setting.Global\Dosetracker.Setting.Global.csproj" />
+    <ProjectReference Include="..\Dosetracker.Settings\Dosetracker.Settings.csproj" />
+  </ItemGroup>
+
+</Project>

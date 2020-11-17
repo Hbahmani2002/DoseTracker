@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Persistance\Core.Persistance.csproj" />
+    <ProjectReference Include="..\Dosetracker.Data.Controller\Dosetracker.Data.Controller.csproj" />
+    <ProjectReference Include="..\Dosetracker.Persistance\Dosetracker.Persistance.csproj" />
+  </ItemGroup>
+
+</Project>

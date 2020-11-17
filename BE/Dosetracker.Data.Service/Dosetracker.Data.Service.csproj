@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dosetracker.Data.Models\Dosetracker.Data.Models.csproj" />
+    <ProjectReference Include="..\Dosetracker.Repository\Dosetracker.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
