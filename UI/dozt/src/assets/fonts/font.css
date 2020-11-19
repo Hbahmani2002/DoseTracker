@@ -1,0 +1,36 @@
+@font-face {
+  font-family: dsLight;
+  src: url("src/assets/fonts/3dsLight.otf") format('opentype');
+}
+@font-face {
+  font-family: dsBold;
+  src: url("src/assets/fonts/3dsBold.ttf") format('truetype');
+}
+@font-face {
+  font-family: dsCondensedBold;
+  src: url("src/assets/fonts/3dsCondensedBold.ttf") format('truetype');
+}
+@font-face {
+  font-family: dsCondensedLight;
+  src: url("src/assets/fonts/3dsCondensedLight.ttf") format('truetype');
+}
+@font-face {
+  font-family: dsCondensedRegular;
+  src: url("src/assets/fonts/3dsCondensedRegular.ttf") format('truetype');
+}
+@font-face {
+  font-family: dsExtraLight;
+  src: url("src/assets/fonts/3dsExtraLight.ttf") format('truetype');
+}
+@font-face {
+  font-family: dsItalic;
+  src: url("src/assets/fonts/3dsItalic.ttf") format('truetype');
+}
+@font-face {
+  font-family: dsRegular;
+  src: url("src/assets/fonts/3dsRegular.ttf") format('truetype');
+}
+@font-face {
+  font-family: dsSemiBold;
+  src: url("src/assets/fonts/3dsSemiBold.ttf") format('truetype');
+}

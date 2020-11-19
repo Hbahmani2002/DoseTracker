@@ -1,0 +1,147 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<nav class="fixed-top navbar navbar-expand navbar-light shadow textClass" style="height: 50px!important; background-color: #1D2127; overflow-y:hidden!important ; z-index:2000!important;">
+  <div style="width: 250px;">
+    <a routerLink=""><img src="./././assets/img/logo.png" /></a>
+  </div>
+  <a (click)="toggle()" id="menu-toggle" class="toggleButton">
+    <!-- <span class="navbar-toggler-icon" style="width:30px; height:30px; color: white;"></span> -->
+    <i class="fas fa-bars" style="width:30px; height:30px; color: white;"></i>>   
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" style="z-index:1000;">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li class="nav-item dropdown">
+        <label style="padding-top:5px;">
+          {{userName}}
+          <img src="././././assets/img/avatar.png" class="avatar">
+        </label>
+        <!--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+     aria-haspopup="true" aria-expanded="false">
+    M.Mert AĞAOĞLU (Admin)
+  </a>-->
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Ayarlar</a>
+          <a class="dropdown-item" href="#">Seçenekler</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item bg-danger" (click)="logout()">Çıkış</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div id="wrapper" class="textClass" [ngClass]="{'toggled' : collapse}" style="padding-top:30px; min-height:85%; background: #282D36 !important;">
+  <!-- Sidebar (scroll)="onWindowScroll($event);"-->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav pt-4">
+      <li>
+        <div>
+          <button (click)="toggleInSide()" class="btn bgColor btn-block text-left rounded-0 p-3" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+            <i class="fas fa-tachometer-alt textColor"></i>
+            <span class="pl-4 textColor">
+              Dashboard
+            </span>
+          </button>
+          <div *ngIf="collapse" class="collapse bgColor " id="collapseExample1">
+            <div class="card card-body p-0 rounded-0 bgColor">
+              <ul class="list-group list-group-flush bgColor textColor">
+                <li class="list-group-item p-0 m-0 bgColor textColor">
+                  <a routerLink="/"><i class="fas fa-angle-right"></i> Dose Tracking</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- <li>
+        <div>
+          <button (click)="toggleInSide()" class="btn btn-block text-left rounded-0 bgColor p-3" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+            <i class="fas fa-user textColor"></i>
+            <span class="pl-4 textColor">
+              Tanımlamalar
+            </span>
+          </button>
+          <div *ngIf="collapse" class="collapse bgColor" id="collapseExample2">
+            <div class="card card-body p-0 rounded-0 bgColor">
+              <ul class="list-group list-group-flush bgColor">
+                <li class="list-group-item p-0 m-0 bgColor v">
+                  <a routerLink="/definitions/user" class="m-0 p-0"><i class="fas fa-angle-right"></i> Kullanıcı Tanımlama</a>
+                </li>
+                <li class="list-group-item p-0 m-0 bgColor textColor">
+                  <a routerLink="/definitions/role"><i class="fas fa-angle-right"></i> Rol Tanımlama</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li> -->
+      <!-- <li>
+        <div>
+          <button (click)="toggleInSide()" class="btn btn-block text-left rounded-0 bgColor p-3" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+            <i class="fas fa-cogs textColor"></i>
+            <span class="pl-4 textColor">
+              Ayarlar
+            </span>
+          </button>
+          <div *ngIf="collapse" class="collapse bgColor" id="collapseExample3">
+            <div class="card card-body p-0 rounded-0 bgColor">
+              <ul class="list-group list-group-flush bgColor">
+                <li class="list-group-item p-0 m-0 bgColor textColor"><a routerLink=""><i class="fas fa-angle-right"></i> Kos Ayarlar</a></li>
+                <li class="list-group-item p-0 m-0 bgColor textColor"><a routerLink=""><i class="fas fa-angle-right"></i> Kullanıcı Ayarlar</a></li>
+                <li class="list-group-item p-0 m-0 bgColor textColor"><a routerLink=""><i class="fas fa-angle-right"></i> Sistem Ayarlar</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li> -->
+      <li>
+        <div>
+          <button (click)="logout()" class="btn btn-block text-left rounded-0 bgColor p-3">
+            <i class="fas fa-sign-out-alt" style="color:red;"></i>
+            <span class="pl-4" style="color:red;">
+              Çıkış
+            </span>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="page-content-wrapper" class="p-0" style="background: #282D36 !important;">
+    <!-- <div class="p-0 shadow-lg dekorCard"></div> -->
+    <div class="container-fluid routerField">
+      <router-outlet ></router-outlet>
+    </div>
+  </div>
+
+</div>
+<!-- <div class="container-fluid footerClass textClass" style="background: #282D36 !important;">
+  <footer class="page-footer font-small teal pt-4 bordered" style="background-color: lightgray;">
+    <div class="container pb-4">
+      <div class="row">
+        <div class="col border-right border-dark text-right">
+          <p class="m-0">Protek Sağlık Bilişim : <span class="text-primary">0(222) 444 11 33</span> </p>
+          <p class="m-0">XYZ Mah , ABC Sk No: 3.14 </p>
+          <p class="m-0">KOCAELİ/GEBZE  </p>
+        </div>
+        <div class="col text-left">
+          <p class="m-0"></p>
+          <p class="m-0">By@Protek Saglik bilisim </p>
+          <p class="m-0">DoselZ</p>
+          <p class="m-0">Versiyon : <span class="text-primary"> 0.0.0.0</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div> -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
+
+
+

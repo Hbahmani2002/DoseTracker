@@ -1,0 +1,8 @@
+.body {
+    height: 100% !important;
+    overflow: hidden !important; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
+    margin: 0px !important; /*removes default style*/
+    display: flex !important; /*enables flex content for its children*/
+    box-sizing: border-box !important;
+    font-family: 'dsLight' !important;
+  }

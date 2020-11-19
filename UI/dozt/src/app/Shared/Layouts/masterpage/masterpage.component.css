@@ -1,0 +1,184 @@
+
+.textClass {
+    font-family: 'dsLight' !important;
+  }
+  .avatar {
+   
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  @media (max-width: 543px) {
+      .navbar-toggleable .navbar-nav .nav-item {
+          margin-left: 0;
+      }
+  }
+  
+  @media (max-width: 767px) {
+      .navbar-toggleable-sm .navbar-nav .nav-item {
+          margin-left: 0;
+      }
+  }
+  
+  @media (max-width: 991px) {
+    .navbar-toggleable-md .navbar-nav .nav-item {
+      margin-left: 0;
+    }
+  }
+  #wrapper {
+    padding-left:50px;
+    padding-right: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  
+  #wrapper.toggled {
+    padding-left: 250px;
+  }
+  .bgColor {
+    background: #1D2127;
+  }
+  
+  
+  
+  .dekorCard {
+    width: 100%;
+    height: 200px;
+    background-color: #BDBDBD;
+    clear: both;
+    position: relative;
+  }
+  .footerClass {
+    padding:0;
+    margin:0;
+    clear: both;
+    position: relative;
+    margin-top: 50px;
+  }
+  .textColor {
+    color: darkgray !important;
+  }
+  img {
+    width: 115px;
+    height: 38px;   
+  }
+  #sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 50px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #1D2127;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+  
+  #page-content-wrapper {
+    width: 100%;
+    height:100%;
+    position: absolute;
+    padding: 15px;
+  }
+  /*#wrapper.toggled .routerField {
+    margin-top: -185px;
+    padding-left:0;
+  }*/
+  .routerField {
+    margin-top: 30px;
+    padding-left: 0px;
+    height: 95vh;
+    width: 90vw;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-left: 0px;
+  }
+  .toggleButton {
+    height:32px;
+    width:32px;
+    border:none;
+    color: white;
+    /*background-color:  #1D2127;*/
+  
+  }
+  
+  /* Sidebar Styles */
+  
+  .sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+  }
+  
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+  }
+  
+  .sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none;
+  }
+  
+  .sidebar-nav>.sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+  }
+  
+  .sidebar-nav>.sidebar-brand a {
+    color: #999999;
+  }
+  
+  .sidebar-nav>.sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+  }
+  
+  @media(min-width:768px) {
+    #wrapper {
+      padding-right: 0;
+    }
+    #wrapper.toggled {
+      padding-left: 250px;
+    }
+    #sidebar-wrapper {
+      width: 50px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+      width: 250px;
+    }
+    #page-content-wrapper {
+      padding: 20px;
+      position: relative;
+    }
+    #wrapper.toggled #page-content-wrapper {
+      position: relative;
+      margin-left: 0;
+    }
+  }
+  
