@@ -51,6 +51,13 @@ export class DashboardComponent implements OnInit {
     this.http.get("https://test_dosetracker.proteksaglik.com/Stat/GetSarGroupData?HospitalIDList[0]=1&HospitalIDList[1]=2&DateStart=" + date1 + "&DateEnd=" + date2 + "&Group=" + this.selectedChartType)
       .subscribe((dataPacket: any) => {
         let data = dataPacket.data;
+        let data2 = [];
+        data.serieData.forEach(serie => {
+          data2.push(serie[1])
+        });
+        data.serieData = data2;
+debugger;
+
         // var data2 = data.map(o => [o[0], o[1] + 1]);
         this.chartData = data;
       });

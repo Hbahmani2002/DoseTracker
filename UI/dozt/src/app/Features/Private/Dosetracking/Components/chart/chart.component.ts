@@ -62,7 +62,7 @@ export class ChartComponent implements OnInit {
       },
       series: [{
         name: 'Sar',
-        data: this.chartData[1]
+        data: this.chartData
       }]
     })
   }
