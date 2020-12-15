@@ -37,13 +37,16 @@ namespace Dosetracker.Persistance.Domain.Models
                 entity.ToTable("dosetracker");
 
                 entity.Property(e => e.Hospitalid)
-                    .HasMaxLength(10)
-                    .HasColumnName("hospitalid")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("hospitalid");
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd()
                     .HasColumnName("id");
+
+                entity.Property(e => e.Operator)
+                    .HasMaxLength(50)
+                    .HasColumnName("operator");
 
                 entity.Property(e => e.Patientage).HasColumnName("patientage");
 
@@ -64,10 +67,7 @@ namespace Dosetracker.Persistance.Domain.Models
                     .HasColumnName("studysequence")
                     .IsFixedLength(true);
 
-                entity.Property(e => e.Vucutkitleendeksi)
-                    .HasMaxLength(10)
-                    .HasColumnName("vucutkitleendeksi")
-                    .IsFixedLength(true);
+                entity.Property(e => e.Vucutkitleendeksi).HasColumnName("vucutkitleendeksi");
             });
 
             OnModelCreatingPartial(modelBuilder);

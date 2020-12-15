@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using static Dosetracker.Data.Service.DoseTracerDataService;
 
 namespace Cloud.HL7.UI.WebApi.Controller
 {
@@ -16,14 +17,7 @@ namespace Cloud.HL7.UI.WebApi.Controller
     public class StatController : ControllerBase
     {
         public class SarGroupDataFilter
-        {
-            public enum GroupType
-            {
-                Sex = 1,
-                Age = 2,
-                Weight = 3,
-                BMI = 4
-            }                                    
+        {                                
             public long[] HospitalIDList { get; set; }
             
             public DateTime? DateStart { get; set; }
@@ -32,10 +26,10 @@ namespace Cloud.HL7.UI.WebApi.Controller
         }
 
         [Route("/Stat/GetSarGroupData")]
-        public RESTServiceResult<List<List<double>>> GetSarGroupData([FromQuery] SarGroupDataFilter filter)
+        public RESTServiceResult<STATUIModel> GetSarGroupData([FromQuery] SarGroupDataFilter filter)
         {
             var service = new DoseTracerDataService();
-            var data = service.GetList(filter.DateStart, filter.DateEnd, filter.HospitalIDList);
+            var data = service.GetList(filter.DateStart, filter.DateEnd, filter.HospitalIDList, filter.Group);
             return RESTServiceResult.OkData(data);
         }
     }

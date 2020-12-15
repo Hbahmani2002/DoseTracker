@@ -16,6 +16,7 @@ namespace Dosetracker.Persistance.Domain.Models
         public int? Patientweight { get; set; }
         public double? Patientsize { get; set; }
         public string Hospitalid { get; set; }
-        public string Vucutkitleendeksi { get; set; }
+        public double? Vucutkitleendeksi { get; set; }
+        public string Operator { get; set; }
     }
 }

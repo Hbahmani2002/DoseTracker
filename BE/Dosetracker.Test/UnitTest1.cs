@@ -1,6 +1,8 @@
 
 //using Dosetracker.Data.Service;
+using Dosetracker.Data.Service;
 using NUnit.Framework;
+using static Dosetracker.Data.Service.DoseTracerDataService;
 
 namespace Dosetracker.Test
 {
@@ -11,11 +13,11 @@ namespace Dosetracker.Test
         {
         }
 
-        //TestDataService service = new TestDataService();
+        DoseTracerDataService service = new DoseTracerDataService();
         [Test]
         public void Test1()
         {
-            //var list= service.GetList();
+            var data = service.GetList(null, null, null, GroupType.Age);
         }
     }
 }
