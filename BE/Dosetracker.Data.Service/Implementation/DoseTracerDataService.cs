@@ -75,6 +75,7 @@ namespace Dosetracker.Data.Service
                 qGroupedDouble = table.GroupBy(o => o.Vucutkitleendeksi<=(18.5)? (double)0 : ((o.Vucutkitleendeksi>18.5 && o.Vucutkitleendeksi<=25)? (double)1 :
                 ((o.Vucutkitleendeksi>25 && o.Vucutkitleendeksi<=30)? (double)2 :((o.Vucutkitleendeksi>30 && o.Vucutkitleendeksi<=40)? (double)3 : (double)4))));
                 item.Title = "BMI Göre SAR";
+
             }
             else if (group == GroupType.AgeRange)
             {
