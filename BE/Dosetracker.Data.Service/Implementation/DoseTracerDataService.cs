@@ -71,11 +71,9 @@ namespace Dosetracker.Data.Service
             }
             else if (group == GroupType.BMI)
             {
-                item.XLabels = new string[] {"<18,5","18,5-24,9","25-29,9","30-39,9","40<","Tanımsız"};
-
-                qGroupedDouble = table.GroupBy(o => o.Vucutkitleendeksi<(18.5)? (double)0 : ((o.Vucutkitleendeksi>18.5 && o.Vucutkitleendeksi<24.9)? (double)1 :
-                ((o.Vucutkitleendeksi>25 && o.Vucutkitleendeksi<29.9)? (double)2 :((o.Vucutkitleendeksi>30 && o.Vucutkitleendeksi<39.9)? (double)3 :
-                ((o.Vucutkitleendeksi>40)? (double)4 : (double)5)))));
+                item.XLabels = new string[] {"<18,5","18,5-25","25-30","30-40","40<"};
+                qGroupedDouble = table.GroupBy(o => o.Vucutkitleendeksi<=(18.5)? (double)0 : ((o.Vucutkitleendeksi>18.5 && o.Vucutkitleendeksi<=25)? (double)1 :
+                ((o.Vucutkitleendeksi>25 && o.Vucutkitleendeksi<=30)? (double)2 :((o.Vucutkitleendeksi>30 && o.Vucutkitleendeksi<=40)? (double)3 : (double)4))));
                 item.Title = "BMI Göre SAR";
             }
             else if (group == GroupType.AgeRange)
