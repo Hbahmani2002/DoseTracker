@@ -1,0 +1,39 @@
+.textClass {
+    font-family: 'dsLight' !important;
+  }
+.login{
+    overflow: hidden;
+    position: fixed; 
+    height: 100%;
+    width:100%;
+    padding: 0;
+    margin: 0;
+}
+.logincard{
+    height: auto !important;
+    width:65% !important;
+    background: #1D2127;
+    border: none !important;
+
+}
+.logo{
+    height: 3rem;
+    width: 9rem;
+    margin-bottom:  3rem;;
+}
+.inputsize{
+    height: 3.5rem !important;
+}
+.buttoncolor{
+    /* background: linear-gradient(to right, #5E2175, #28447A ) !important; */
+    background: linear-gradient(93.73deg, #5E2175 0%, #28447A 100%);
+    border: none !important;
+}
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }

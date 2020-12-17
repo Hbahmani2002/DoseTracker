@@ -1,0 +1,30 @@
+<div class="m-0">
+    <div class="card m-0 shadow  bg-white rounded-1">
+        <div class="card-header p-1">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="align-middle"><i class="fas fa-filter"></i> {{headertext}} </span>
+                </div>
+                <div class="col-md-6">
+                    <div class="float-right">
+                        <button class="btn btn-default btn-sm " data-toggle="collapse" href="#collapseExample"
+                        role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i *ngIf="!isCollapsed" class="fas fa-angle-down"></i>
+                        <i *ngIf="isCollapsed" class="fas fa-angle-up"></i>
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <ng-content></ng-content>
+            </div>
+        </div>
+        <!-- <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+            <div class="card-body p-2">
+                
+            </div>
+        </div> -->
+    </div>
+</div>

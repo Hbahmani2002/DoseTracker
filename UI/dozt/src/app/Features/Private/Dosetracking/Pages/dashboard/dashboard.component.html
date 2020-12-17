@@ -1,4 +1,4 @@
-<div class="container-fluid h-100"  style="background: #282D36 !important;">
+<div class="container-fluid h-100">
     <div class="row h-100 pt-1">
         <div class="col-md-12">
             <div class="row mb-0">
@@ -6,8 +6,53 @@
                     <pageheader headertext="Dashboard" pageposition="Dashboard > Dose Tracking"></pageheader>
                 </div>
             </div>
-            <div class="row" style="width: 100%; height: 500px;">
+            <div class="row p-2">
+                <div class="col p-0">
+                    <filter header="Filtreleme">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Grafik Seçimi</label>
+                                    <select [(ngModel)]="selectedChartType" class="form-control" id="exampleFormControlSelect1">
+                                       <option *ngFor="let item of chartType" value="{{item.id}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bsDatepicker">Tarih Aralığı</label>
+                                    <input 
+                                        class="form-control" 
+                                        type="text"
+                                        autocomplete="off"
+                                        name="dateRange"
+                                        [(ngModel)]="dateRange"
+                                        placeholder="Tarih Aralığı" 
+                                        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY', rangeInputFormat : 'DD/MM/YYYY', containerClass: 'theme-default'}" 
+                                        #drp="bsDaterangepicker" 
+                                        bsDaterangepicker >
+                           
+                                    <!-- <input 
+                                        id="bsDatepicker" 
+                                        type="text" 
+                                        placeholder="Datepicker" 
+                                        class="form-control" 
+                                        bsDatepicker> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-1">
+                            <button type="button" class="btn btn-success btn-sm mr-2" data-toggle="tooltip" data-placement="top" title="Filtrele" (click)="onFilter()"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-danger  btn-sm" data-toggle="tooltip" data-placement="top" title="Filtreleri Temizle" (click)="onClearFilter()"><i class="fas fa-times"></i></button>
+                          </div>
+                    </filter>
+                </div>
 
+            </div>
+            <div class="row p-2">
+                <div class="col">
+                    <chart [data]="chartData"></chart>
+                </div>
             </div>
         </div>
         <div>
