@@ -1,5 +1,6 @@
 ﻿using Cloud.HL7.Api.Contract;
 using Dosetracker.Data.Service;
+using Dosetracker.Repository.Models;
 using GT.Core.Settings;
 using GT.UI.WebApi.Implementation;
 using Microsoft.AspNetCore.Mvc;
@@ -26,10 +27,18 @@ namespace Cloud.HL7.UI.WebApi.Controller
         }
 
         [Route("/Stat/GetSarGroupData")]
-        public RESTServiceResult<STATUIModel> GetSarGroupData([FromQuery] SarGroupDataFilter filter)
+        public RESTServiceResult<STATUIModel> GetSarGroupData(SarGroupDataFilter filter)
         {
             var service = new DoseTracerDataService();
             var data = service.GetList(filter.DateStart, filter.DateEnd, filter.HospitalIDList, filter.Group);
+            return RESTServiceResult.OkData(data);
+        }
+
+        [Route("/Stat/GetDataOzet")]
+        public RESTServiceResult<DataOzetViewModel> GetDataOzet(SarGroupDataFilter filter)
+        {
+            var service = new DoseTracerDataService();
+            var data = service.GetDataOzet(filter.DateStart, filter.DateEnd, filter.HospitalIDList, filter.Group);
             return RESTServiceResult.OkData(data);
         }
     }

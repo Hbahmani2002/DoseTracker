@@ -1,5 +1,5 @@
-﻿using Dosetracker.Data.Service.Conditions;
-using Dosetracker.Repository;
+﻿using Dosetracker.Repository;
+using Dosetracker.Repository.Models;
 using GT.SERVICE;
 using LinqKit;
 using System;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using static Dosetracker.Repository.Condition.DosectrackerCondition;
 
 namespace Dosetracker.Data.Service
 {
@@ -32,14 +33,17 @@ namespace Dosetracker.Data.Service
             Weight = 3,
             BMI = 4,
             AgeRange = 5,
+            PatientSize = 6
         }
         class SerieItem
         {
             public object Key { get; set; }
-
             public double? Min { get; set; }
             public double? Max { get; set; }
             public double? Avg { get; set; }
+            public long DataCount { get; set; }
+            public long StudySarCount { get; set; }
+            public List<string> OperatorList { get; set; }
         }
 
         public STATUIModel GetList(DateTime? start, DateTime? end, long[] hospitalIDList, GroupType group)
@@ -48,26 +52,32 @@ namespace Dosetracker.Data.Service
             item.YLabel = "SAR";
             IQueryable<IGrouping<string, Persistance.Domain.Models.Dosetracker>> qGrouped = null;
             IQueryable<IGrouping<double, Persistance.Domain.Models.Dosetracker>> qGroupedDouble = null;
-            var exp = DoseTrackerCondition.Exp(start, end, hospitalIDList);
-            var table = _DosectrackerRepository.Query(exp);
+            var operatorList = new List<string>();
+            var filter = new DosectrackerConditionFilter
+            {
+                BasTar=start,
+                BitTar=end
+            };
+            var table = _DosectrackerRepository.Query(filter);
             if (group == GroupType.Age)
             {
                 qGroupedDouble = table.GroupBy(o => (double)o.Patientage.Value);
                 item.Title = "Yaşa Göre SAR";
                 item.YLabel = "SAR";
+                operatorList= table.Where(o => o.Studysar > 3.2).GroupBy(o => new { PatientAge= (double)o.Patientage.Value ,Operator=o.Operator}).Select(o=>o.Key.Operator).ToList();
             }
             else if (group == GroupType.Sex)
             {
                 qGrouped = table.GroupBy(o => o.Patientsex.Value.ToString());
                 item.Title = "Cinsiyete Göre SAR";
-
                 item.XLabels = new string[] { "kadın", "erkek" };
+                operatorList = table.Where(o => o.Studysar > 3.2).GroupBy(o => new { Patientsex = o.Patientsex.Value, Operator = o.Operator }).Select(o => o.Key.Operator).ToList();
             }
             else if (group == GroupType.Weight)
             {
                 qGroupedDouble = table.GroupBy(o => (double)o.Patientweight.Value);
                 item.Title = "Weight Göre SAR";
-
+                operatorList = table.Where(o => o.Studysar > 3.2).GroupBy(o => new { Patientweight = (double)o.Patientweight.Value, Operator = o.Operator }).Select(o => o.Key.Operator).ToList();
             }
             else if (group == GroupType.BMI)
             {
@@ -75,7 +85,35 @@ namespace Dosetracker.Data.Service
                 qGroupedDouble = table.GroupBy(o => o.Vucutkitleendeksi<=(18.5)? (double)0 : ((o.Vucutkitleendeksi>18.5 && o.Vucutkitleendeksi<=25)? (double)1 :
                 ((o.Vucutkitleendeksi>25 && o.Vucutkitleendeksi<=30)? (double)2 :((o.Vucutkitleendeksi>30 && o.Vucutkitleendeksi<=40)? (double)3 : (double)4))));
                 item.Title = "BMI Göre SAR";
+                operatorList = table.Where(o => o.Studysar > 3.2).GroupBy(o => new
+                {
+                    BMI = o.Vucutkitleendeksi <= (18.5) ? (double)0 : ((o.Vucutkitleendeksi > 18.5 && o.Vucutkitleendeksi <= 25) ? (double)1 :
+                  ((o.Vucutkitleendeksi > 25 && o.Vucutkitleendeksi <= 30) ? (double)2 : ((o.Vucutkitleendeksi > 30 && o.Vucutkitleendeksi <= 40) ? (double)3 : (double)4))),
+                    Operator = o.Operator
+                }).Select(o => o.Key.Operator).ToList();
 
+            }
+            else if (group == GroupType.PatientSize)
+            {
+                item.XLabels = new string[] { "0-10","11-20","21-30","31-40","41-50","51-60","61-70","71-80","81-90","91-100","101-110","111-120","121-130","131-140","141-150","151-..." };
+                qGroupedDouble = table.GroupBy(o => o.Patientsize <= 10 ? (double)0 : ((o.Patientsize > 10 && o.Patientsize <= 20) ? (double)1 :
+                ((o.Patientsize > 20 && o.Patientsize <= 30) ? (double)2 : ((o.Patientsize > 30 && o.Patientsize <= 40) ? (double)3 : ((o.Patientsize>40 && o.Patientsize<=50)?(double)4:
+                ((o.Patientsize>50 && o.Patientsize<=60)?(double)5:((o.Patientsize>60 && o.Patientsize<=70)?(double)6:((o.Patientsize>70 && o.Patientsize<=80)?(double)7:(
+                (o.Patientsize>80 && o.Patientsize<=90)?(double)8:((o.Patientsize>90 && o.Patientsize<=100)?(double)9:((o.Patientsize>100 && o.Patientsize<=110)?(double)10:(
+                (o.Patientsize>110 && o.Patientsize<=120)?(double)11:((o.Patientsize>120 && o.Patientsize<=130)?(double)12:((o.Patientsize>130 && o.Patientsize<=140)?(double)13:(
+                (o.Patientsize>140 && o.Patientsize<=150)?(double)14:(double)15)))))))))))))));
+
+                operatorList = table.Where(o => o.Studysar > 3.2).GroupBy(o => new
+                {
+                   Aralik= o.Patientsize <= 10 ? (double)0 : ((o.Patientsize > 10 && o.Patientsize <= 20) ? (double)1 :
+                ((o.Patientsize > 20 && o.Patientsize <= 30) ? (double)2 : ((o.Patientsize > 30 && o.Patientsize <= 40) ? (double)3 : ((o.Patientsize > 40 && o.Patientsize <= 50) ? (double)4 :
+                ((o.Patientsize > 50 && o.Patientsize <= 60) ? (double)5 : ((o.Patientsize > 60 && o.Patientsize <= 70) ? (double)6 : ((o.Patientsize > 70 && o.Patientsize <= 80) ? (double)7 : (
+                (o.Patientsize > 80 && o.Patientsize <= 90) ? (double)8 : ((o.Patientsize > 90 && o.Patientsize <= 100) ? (double)9 : ((o.Patientsize > 100 && o.Patientsize <= 110) ? (double)10 : (
+                (o.Patientsize > 110 && o.Patientsize <= 120) ? (double)11 : ((o.Patientsize > 120 && o.Patientsize <= 130) ? (double)12 : ((o.Patientsize > 130 && o.Patientsize <= 140) ? (double)13 : (
+                (o.Patientsize > 140 && o.Patientsize <= 150) ? (double)14 : (double)15)))))))))))))),
+                Operator=o.Operator
+                }).Select(o=>o.Key.Operator).ToList();
+                item.Title = "Ağırlığa Göre Göre SAR";
             }
             else if (group == GroupType.AgeRange)
             {
@@ -86,19 +124,23 @@ namespace Dosetracker.Data.Service
                     labels.Add(labelItem);
                 }
                 item.XLabels = labels.ToArray();
-                qGroupedDouble = table.GroupBy(o => (double)((int)o.Studysar / 10));
+                qGroupedDouble = table.GroupBy(o => (double)((int)o.Patientage / 10));
                 item.Title = "Yaş aralığına Göre SAR";
-
+                operatorList = table.Where(o => o.Studysar > 3.2).GroupBy(o => new { AgeRange = (double)((int)o.Patientage / 10), Operator = o.Operator }).Select(o => o.Key.Operator).ToList();
             }
-            IQueryable<SerieItem> res = null;
+            IEnumerable<SerieItem> res = null;
             if (qGroupedDouble != null)
             {
+
                 res = qGroupedDouble.Select(o => new SerieItem
                 {
                     Key = o.Key,
                     Min = o.Min(t => t.Studysar),
                     Max = o.Max(t => t.Studysar),
-                    Avg = o.Average(t => t.Studysar)
+                    Avg = o.Average(t => t.Studysar),
+                    DataCount = o.Count(),
+                    StudySarCount = o.Where(x => x.Studysar > 3.2).Count(),
+                    OperatorList= operatorList
                 });
             }
             else
@@ -108,9 +150,11 @@ namespace Dosetracker.Data.Service
                     Key = o.Key,
                     Min = o.Min(t => t.Studysar),
                     Max = o.Max(t => t.Studysar),
-                    Avg = o.Average(t => t.Studysar)
+                    Avg = o.Average(t => t.Studysar),
+                    DataCount = o.Count(),
+                    StudySarCount = o.Where(x => x.Studysar > 3.2).Count(),
+                    OperatorList = operatorList
                 });
-
             }
             var list = res.OrderBy(o => o.Key).ToList();
             var data = list
@@ -120,17 +164,49 @@ namespace Dosetracker.Data.Service
                         Min = o.Min.GetValueOrDefault(),
                         Avg = o.Avg.GetValueOrDefault(),
                         Max = o.Max.GetValueOrDefault(),
-                    }
-                    ).ToArray();
+                        DataCount = o.DataCount,
+                        StudySarCount=o.StudySarCount,
+                        OperatorList=o.OperatorList
+                    }).ToArray();
 
             item.SerieData = data
                     .Select(o =>
-                        new[] { o.Key, o.Min, o.Avg, o.Max
-        }
+                        new[] { o.Key, o.Min, o.Avg, o.Max,o.DataCount,o.StudySarCount,o.OperatorList }
                         )
                         .ToArray();
             return item;
 
+        }
+
+        public DataOzetViewModel GetDataOzet(DateTime? start, DateTime? end, long[] hospitalIDList, GroupType group)
+        {
+            var filter = new DosectrackerConditionFilter
+            {
+                BasTar = start,
+                BitTar = end,
+                IsRiskli=true
+            };
+            var table = _DosectrackerRepository.Query(filter);
+            var hastaneList = table.Select(o => o.Hospitalid).ToArray();
+            var operatorSayisi = table.Count();
+
+            var filter2 = new DosectrackerConditionFilter
+            {
+                BasTar = start,
+                BitTar = end
+            };
+            var table2 = _DosectrackerRepository.Query(filter2);
+            
+            var toplamData = table2.Count();
+            var maxSar = string.Format("{0:0.00}", table2.Max(o => o.Studysar)) + " watts/kilogram";
+            var minSar = string.Format("{0:0.00}", table2.Min(o => o.Studysar)) + " watts/kilogram";
+            return new DataOzetViewModel { 
+                HastaneList= hastaneList,
+                OperatorSayisi= operatorSayisi,
+                ToplamData=toplamData,
+                EnDusukSar=minSar,
+                EnYuksekSar=maxSar
+            };
         }
     }
 }
