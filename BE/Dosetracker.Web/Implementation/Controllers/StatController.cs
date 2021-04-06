@@ -27,6 +27,7 @@ namespace Cloud.HL7.UI.WebApi.Controller
         }
 
         [Route("/Stat/GetSarGroupData")]
+        [HttpPost]
         public RESTServiceResult<STATUIModel> GetSarGroupData(SarGroupDataFilter filter)
         {
             var service = new DoseTracerDataService();
@@ -35,6 +36,7 @@ namespace Cloud.HL7.UI.WebApi.Controller
         }
 
         [Route("/Stat/GetDataOzet")]
+        [HttpPost]
         public RESTServiceResult<DataOzetViewModel> GetDataOzet(SarGroupDataFilter filter)
         {
             var service = new DoseTracerDataService();

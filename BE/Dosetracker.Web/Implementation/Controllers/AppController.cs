@@ -15,6 +15,7 @@ namespace Cloud.HL7.UI.WebApi.Controller
     {
 
         [Route("/App/Control")]
+        [HttpGet]
         public RESTServiceResult<object> Control()
         {
             var ass = Assembly.GetExecutingAssembly().GetName();
