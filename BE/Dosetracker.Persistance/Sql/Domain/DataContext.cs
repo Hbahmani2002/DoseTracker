@@ -16,20 +16,19 @@ namespace MEDLIFE.PERSISTANCE.DOMAIN.Models
            = LoggerFactory.Create(builder =>
            {
                builder.AddDebug();
-           });        
+           });
 
         public bool IsLogging { get; set; }
 
-        public DataContext(bool logging=false)
+        public DataContext(bool logging = false)
            : base(/*$"name={LocalSettings.AppName}"*/"")
-        {            
+        {
             IsLogging = logging;
         }
         public virtual DbSet<Dosetracker.Persistance.Domain.Models.Dosetracker> Dosetrackers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
             if (!optionsBuilder.IsConfigured)
             {
                 if (IsLogging)
