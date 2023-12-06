@@ -4,6 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "dozt": {
+      
       "projectType": "application",
       "schematics": {},
       "root": "",
